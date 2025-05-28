@@ -21,8 +21,8 @@ Sigue estos pasos para clonar, instalar dependencias y ejecutar la app en modo d
 ### 1. Clona el repositorio
 
 ```bash
-git clone (https://github.com/sebastian-100109/login_app.git)
-cd https://github.com/sebastian-100109/login_app.git
+git clone (https://github.com/sebastian-100109/FacturaInventario.git)
+cd https://github.com/sebastian-100109/FacturaInventario.git
 2 . Instala las dependencias
 npm install
 
@@ -80,3 +80,4 @@ Este proyecto está bajo la licencia MIT.
 
  Autor
 Sebastian Alfonso  - @sebastian-100109
+https://github.com/sebastian-100109/FacturaInventario.git
