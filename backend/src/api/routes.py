@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Depends, HTTPException, status
 from fastapi.security import OAuth2PasswordRequestForm
 from sqlalchemy.orm import Session
-
+from typing import List
 from src.db.database import get_db
 from src.models.user import User
 from src.schemas.user import User as UserSchema, UserCreate, Token
@@ -27,9 +27,10 @@ def login_endpoint(
     """
     return login_user(db, form_data.username, form_data.password)
 
-@router.get("/me", response_model=UserSchema)
-def read_users_me(current_user: User = Depends(get_current_user)):
+@router.get("/ver-datos", response_model=List[UserSchema])
+def ver_datos(db: Session = Depends(get_db)):
     """
-    Obtener información del usuario actual
+    Obtiene todos los registros de usuarios de la base de datos
     """
-    return current_user
+    users = db.query(User).all()
+    return users
