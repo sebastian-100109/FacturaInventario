@@ -1,0 +1,174 @@
+.product-manager {
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.product-manager h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: white;
+}
+
+/* Disposición de tres columnas */
+.product-layout-three-columns {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 15px;
+}
+
+.column {
+    min-width: 0;
+    /* Importante para evitar desbordamiento */
+}
+
+/* Estilos para la lista de productos (izquierda) */
+.product-list-container {
+    background: rgba(0, 0, 0, 0.4);
+    padding: 15px;
+    border-radius: 8px;
+}
+
+.table-container {
+    overflow-x: auto;
+    /* Para tablas responsivas */
+}
+
+.product-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+    color: white;
+}
+
+.product-table th,
+.product-table td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.product-table th {
+    background-color: rgba(0, 0, 0, 0.2);
+}
+
+/* Estilos para el formulario (centro) */
+.product-form-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.product-form {
+    background: rgba(0, 0, 0, 0.4);
+    padding: 15px;
+    border-radius: 8px;
+    height: 100%;
+}
+
+/* Estilos para el buscador (derecha) */
+.product-search-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.product-search {
+    background: rgba(0, 0, 0, 0.4);
+    padding: 15px;
+    border-radius: 8px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    color: white;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 8px;
+    border: none;
+    border-radius: 4px;
+    background: white;
+}
+
+h3 {
+    color: white;
+    margin-top: 0;
+    margin-bottom: 15px;
+}
+
+h4 {
+    color: white;
+    margin-top: 10px;
+    margin-bottom: 5px;
+}
+
+button {
+    padding: 8px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.save-btn {
+    background-color: #4CAF50;
+    color: white;
+    width: 100%;
+}
+
+.search-btn {
+    background-color: #2196F3;
+    color: white;
+    width: 100%;
+}
+
+.delete-btn {
+    background-color: #f44336;
+    color: white;
+}
+
+.search-result {
+    margin-top: 15px;
+    padding: 10px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 4px;
+}
+
+.product-card {
+    padding: 10px;
+    color: white;
+}
+
+/* Para pantallas medianas, cambiar a dos columnas */
+@media (max-width: 992px) {
+    .product-layout-three-columns {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .product-search-container {
+        grid-column: 2;
+    }
+
+    .product-list-container {
+        grid-column: 1;
+        grid-row: 1 / span 2;
+    }
+}
+
+/* Para pantallas pequeñas, cambiar a una columna */
+@media (max-width: 768px) {
+    .product-layout-three-columns {
+        grid-template-columns: 1fr;
+    }
+
+    .product-list-container,
+    .product-search-container {
+        grid-column: 1;
+        grid-row: auto;
+    }
+}
