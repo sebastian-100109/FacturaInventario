@@ -9,6 +9,8 @@ function Register() {
     email: '',
     contrasena: ''
   });
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState('');
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -16,19 +18,65 @@ function Register() {
       ...prevState,
       [name]: value
     }));
+    // Limpiar error cuando el usuario empiece a escribir
+    if (error) setError('');
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    setError('');
 
     // Verifica que todos los campos estén llenos
     if (!formData.nombre || !formData.email || !formData.contrasena) {
-      alert('Por favor, complete todos los campos.');
+      setError('Por favor, complete todos los campos.');
       return;
     }
 
-    console.log('Datos de registro:', formData);
-    navigate('/');
+    setIsLoading(true);
+
+    try {
+      // Preparar los datos para enviar al backend
+      const userData = {
+        email: formData.email,
+        password: formData.contrasena,
+        nombre: formData.nombre // Si tu backend acepta nombre adicional
+      };
+
+      console.log('Enviando datos:', userData);
+      console.log('URL:', 'http://localhost:8000/auth/register');
+
+      const response = await fetch('http://localhost:8000/auth/register', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(userData)
+      });
+
+      console.log('Response status:', response.status);
+      console.log('Response headers:', response.headers);
+
+      if (!response.ok) {
+        const errorData = await response.text(); // Cambiar a text() para ver el error completo
+        console.log('Error response:', errorData);
+        throw new Error(errorData || `Error ${response.status}: ${response.statusText}`);
+      }
+
+      const result = await response.json();
+      console.log('Usuario registrado exitosamente:', result);
+      
+      // Mostrar mensaje de éxito
+      alert('¡Usuario registrado exitosamente!');
+      
+      // Redirigir al login
+      navigate('/');
+      
+    } catch (error) {
+      console.error('Error en el registro:', error);
+      setError(error.message || 'Error al registrar usuario. Intente nuevamente.');
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const handleLoginClick = () => {
@@ -48,8 +96,18 @@ function Register() {
           <img src="/images/logo.png" alt="Logo" className="logo" />
           <h1 style={{ color: "#ffffff" }}>Registro</h1>
 
-
-
+          {error && (
+            <div className="error-message" style={{ 
+              color: '#ff4444', 
+              backgroundColor: '#ffe6e6', 
+              padding: '10px', 
+              borderRadius: '5px', 
+              marginBottom: '15px',
+              border: '1px solid #ff4444'
+            }}>
+              {error}
+            </div>
+          )}
 
           <form onSubmit={handleSubmit}>
             <div className="form-group">
@@ -61,6 +119,7 @@ function Register() {
                 value={formData.nombre}
                 onChange={handleChange}
                 required
+                disabled={isLoading}
               />
             </div>
 
@@ -73,6 +132,7 @@ function Register() {
                 value={formData.email}
                 onChange={handleChange}
                 required
+                disabled={isLoading}
               />
             </div>
 
@@ -85,11 +145,20 @@ function Register() {
                 value={formData.contrasena}
                 onChange={handleChange}
                 required
+                disabled={isLoading}
               />
             </div>
 
-            <button type="submit" className="register-submit-button">
-              Registrarse
+            <button 
+              type="submit" 
+              className="register-submit-button"
+              disabled={isLoading}
+              style={{
+                opacity: isLoading ? 0.7 : 1,
+                cursor: isLoading ? 'not-allowed' : 'pointer'
+              }}
+            >
+              {isLoading ? 'Registrando...' : 'Registrarse'}
             </button>
           </form>
         </div>
