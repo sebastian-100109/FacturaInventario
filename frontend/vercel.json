@@ -1,0 +1,11 @@
+{
+  "projects": {
+    "default": {
+      "source": "frontend",
+      "outputDirectory": "frontend/build",
+      "framework": "create-react-app"
+    }
+  },
+  "buildCommand": "cd frontend && npm install && npm run build",
+  "outputDirectory": "frontend/build"
+}
