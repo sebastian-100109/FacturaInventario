@@ -20,7 +20,7 @@ function Login() {
             // Preparar los datos para OAuth2PasswordRequestForm
             // FastAPI espera 'username' y 'password' como form-data
             const formData = new FormData();
-            formData.append('username', email); 
+            formData.append('username', email);
             formData.append('password', password);
 
             console.log('Enviando datos de login:', { username: email, password: '***' });
@@ -28,7 +28,7 @@ function Login() {
             // Usar variable de entorno o valor por defecto
             const API_BASE_URL = process.env.REACT_APP_API_URL || 'https://facturainventario.onrender.com';
             const apiUrl = `${API_BASE_URL}/auth/login`;
-            
+
             console.log('URL de login:', apiUrl);
 
             const response = await fetch(apiUrl, {
@@ -41,7 +41,7 @@ function Login() {
             if (!response.ok) {
                 const errorData = await response.text();
                 console.log('Error response:', errorData);
-                
+
                 // Manejar diferentes tipos de errores
                 if (response.status === 401) {
                     throw new Error('Email o contraseña incorrectos');
@@ -59,7 +59,7 @@ function Login() {
             if (result.access_token) {
                 localStorage.setItem('access_token', result.access_token);
                 localStorage.setItem('token_type', result.token_type || 'bearer');
-                
+
                 // También puedes guardar información del usuario si la necesitas
                 localStorage.setItem('user_email', email);
             }
@@ -104,11 +104,11 @@ function Login() {
                 <h1 className='login-title'>Iniciar Sesión</h1>
 
                 {error && (
-                    <div className="error-message" style={{ 
-                        color: '#ff4444', 
-                        backgroundColor: '#ffe6e6', 
-                        padding: '10px', 
-                        borderRadius: '5px', 
+                    <div className="error-message" style={{
+                        color: '#ff4444',
+                        backgroundColor: '#ffe6e6',
+                        padding: '10px',
+                        borderRadius: '5px',
                         marginBottom: '15px',
                         border: '1px solid #ff4444',
                         textAlign: 'center'
@@ -126,7 +126,7 @@ function Login() {
                                 id="email"
                                 value={email}
                                 onChange={handleInputChange(setEmail)}
-                                required 
+                                required
                                 disabled={isLoading}
                             />
                         </div>
@@ -138,15 +138,22 @@ function Login() {
                                 id="password"
                                 value={password}
                                 onChange={handleInputChange(setPassword)}
-                                required 
+                                required
                                 disabled={isLoading}
                             />
                         </div>
 
-                        <a className="forgot-password">¿olvidaste tu contraseña?</a>
+                        <button
+                            type="button"
+                            className="forgot-password"
+                            onClick={() => alert('Funcionalidad próximamente')}
+                        >
+                            ¿olvidaste tu contraseña?
+                        </button>
 
-                        <button 
-                            type="submit" 
+
+                        <button
+                            type="submit"
                             className="sign-in-button"
                             disabled={isLoading}
                             style={{
