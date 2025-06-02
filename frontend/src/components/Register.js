@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import './Register.css'; // Asegúrate de que este archivo existe con la R mayúscula
+import './Register.css';
 
 function Register() {
   const navigate = useNavigate();
@@ -43,12 +43,17 @@ function Register() {
       };
 
       console.log('Enviando datos:', userData);
-      console.log('URL:', 'http://localhost:8000/auth/register');
+      
+      const API_BASE_URL = process.env.REACT_APP_API_URL || 'https://facturainventario.onrender.com';
+      
+      const apiUrl = `${API_BASE_URL}/auth/register`;
+      console.log('URL:', apiUrl);
 
-      const response = await fetch('http://localhost:8000/auth/register', {
+      const response = await fetch(apiUrl, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          'Accept': 'application/json',
         },
         body: JSON.stringify(userData)
       });

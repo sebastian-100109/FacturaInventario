@@ -25,7 +25,7 @@ function Login() {
             console.log('Enviando datos de login:', { username: email, password: '***' });
 
             // Usar variable de entorno o valor por defecto
-            const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:8000';
+            const API_BASE_URL = process.env.REACT_APP_API_URL || 'https://facturainventario.onrender.com';
             const apiUrl = `${API_BASE_URL}/auth/login`;
             
             console.log('URL de login:', apiUrl);

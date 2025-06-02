@@ -15,7 +15,11 @@ app = FastAPI(
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3000"],  # Puerto de tu React app
+    allow_origins=[ "https://factura-inventario.vercel.app",  # Tu dominio de Vercel
+        "http://localhost:3000",  # Para desarrollo local
+        "http://localhost:5173",  # Para desarrollo local con Vite
+                   
+    ],  # Puerto de tu React app
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
