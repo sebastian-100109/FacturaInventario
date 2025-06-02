@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+
 import './login.css';
 
 function Login() {
@@ -142,7 +143,7 @@ function Login() {
                             />
                         </div>
 
-                        <a href="#" className="forgot-password">¿olvidaste tu contraseña?</a>
+                        <a className="forgot-password">¿olvidaste tu contraseña?</a>
 
                         <button 
                             type="submit" 
