@@ -1,11 +1,8 @@
 {
-  "projects": {
-    "default": {
-      "source": "frontend",
-      "outputDirectory": "frontend/build",
-      "framework": "create-react-app"
-    }
-  },
   "buildCommand": "cd frontend && npm install && npm run build",
-  "outputDirectory": "frontend/build"
+  "outputDirectory": "frontend/build",
+  "rewrites": [
+    { "source": "/api/(.*)", "destination": "/api/$1" },
+    { "source": "/(.*)", "destination": "/index.html" }
+  ]
 }
